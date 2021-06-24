@@ -26,4 +26,20 @@ class UserController extends Controller
         
         return   $user;
     }
+
+    function login(Request $req){
+        //  $user=User::where('email',$req->email)->first(); will  give direct json object of requested data 
+        // $user=User::where('email',$req->email)->get(); will return array of requested data
+
+        $user=User::where('email',$req->email)->first();
+        // !$user means if $user is not available
+        if(!$user || !Hash::check($req->password,$user->password))
+        {
+            return response([
+                'error'=>["user name or password incorrect"]
+            ]);
+        }
+        return $user;
+
+    }
 }
