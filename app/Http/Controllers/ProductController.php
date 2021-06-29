@@ -35,4 +35,13 @@ class ProductController extends Controller
     return  Product::find($id);
 
    }
+   function updateProduct($id,Request $req){
+    $products=Product::find($id);
+    $products->name=$req->input('name');
+    $products->price=$req->input('price');
+    $products->description=$req->input('description');
+    $products->file_path=$req->file('file')->store('productsImage');
+    $products->save();
+    return $products;
+     }
 }
