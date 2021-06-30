@@ -40,7 +40,10 @@ class ProductController extends Controller
     $products->name=$req->input('name');
     $products->price=$req->input('price');
     $products->description=$req->input('description');
+   if($req->file('file'))
+   {
     $products->file_path=$req->file('file')->store('productsImage');
+   }
     $products->save();
     return $products;
      }
